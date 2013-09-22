@@ -11,34 +11,13 @@ puts '*' *50
 
 puts "Files with content that matches <#{filename}>"
 a = string=`grep -r -i -n --include=*.rb --include=*.html --include=*.erb --include=*.js --include=*.css --include=*.yml --include=*.txt "#{filename}" .`
-#puts a
 arr = a.split("\n")
 arr.sort_by! { |str| str }
 arr.each { |str|  str.gsub!(/\:/,"\n")
 		arr2 = str.split("\n")
 		puts arr2[0]
 		puts "  #{arr2[1]}:#{arr2[2]}"
-	#	puts arr2[2]
-	#	arr2[1]	
-		puts '-' *50 }
-#nstr = ""
-#arr.each { |str| arr2 = str.split(":")
-#		arr2.each { |str2|
-#		if str[0] == "."
-#			if nstr != str
-#				nstr = str
-#				puts str
-#			end
-#		elsif str[0] != "l"
-#			str.delete "\n" #delete the newline at the end
-#			puts str
-#			puts ":"
-#		elsif str != nstr
-#			puts str
-#		else
-#			#its a duplicate, so skip it
-#		end
-#	}	
-
-#arr.reverse_each { |str| print "  ", str, "\n"}
+		if str != arr[-1]
+			puts '-' *50 
+		end}
 
