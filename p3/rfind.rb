@@ -22,7 +22,7 @@ arr.map! { |str|  str.gsub!(/\:/,"\n")
 arr.flatten!
 arr.uniq!
 arr.each { |str| 
-		if str[0] == "."
+		if str[0] == "." && str != arr[0]
 			puts '-' *50
 			puts "#{str}\n"
 		else
