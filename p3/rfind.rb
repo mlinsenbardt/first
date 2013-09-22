@@ -6,18 +6,31 @@ puts "Files with names that matches <#{filename}>"
 sname = `find . -name  '\*.rb' -o -name '\*.html' -o -name '\*.erb' -o -name '\*.js' -o -name '\*.css' -o -name '\*.yml' -o -name '\*.txt'`
 sarr = sname.split("\n")
 sarr.select! { |str|    str.include? "#{filename}"}
-	 #	|| str.include? ".html" 
-	#	|| str.include? ".erb"
-	#	|| str.include? ".js" 
-	#	|| str.include? ".css" 
-	#	|| str.include? ".yml"
-	#	|| str.include? ".txt" 
 sarr.each { |str| print "  ", str, "\n"}
-
-
 puts '*' *50
+
 puts "Files with content that matches <#{filename}>"
-a = string=`grep -r -i -n "#{filename}" .`
-arr = a.split('\n')
-puts arr
+a = string=`grep -r -i -n --include=*.rb --include=*.html --include=*.erb --include=*.js --include=*.css --include=*.yml --include=*.txt "#{filename}" .`
+#puts a
+arr = a.split("\n")
+nstr = ""
+arr.each { |str| arr2 = str.split(":")
+		arr2.each { |str2|
+		if str[0] == "."
+			if nstr != str
+				nstr = str
+				puts str
+			end
+		elsif str[0] != "l"
+			str.delete "\n" #delete the newline at the end
+			puts str
+			puts ":"
+		elsif str != nstr
+			puts str
+		else
+			#its a duplicate, so skip it
+		end
+	}	
+
+#arr.reverse_each { |str| print "  ", str, "\n"}
 
