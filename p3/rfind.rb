@@ -14,8 +14,12 @@ a = string=`grep -r -i -n --include=*.rb --include=*.html --include=*.erb --incl
 #puts a
 arr = a.split("\n")
 arr.sort_by! { |str| str }
-arr.each { |str|  str.gsub!(/\:+[0-9]/,"\n  ")
-		puts str
+arr.each { |str|  str.gsub!(/\:/,"\n")
+		arr2 = str.split("\n")
+		puts arr2[0]
+		puts "  #{arr2[1]}:#{arr2[2]}"
+	#	puts arr2[2]
+	#	arr2[1]	
 		puts '-' *50 }
 #nstr = ""
 #arr.each { |str| arr2 = str.split(":")
