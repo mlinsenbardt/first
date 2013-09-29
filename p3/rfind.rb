@@ -18,6 +18,8 @@ arr.map! { |str|  str.gsub!(/\:/,"\n")
 		arr2[1] = "  #{arr2[1]}:#{arr2[2]}"
 		arr2.pop
 		str = arr2
+		puts str
+		puts "\n"
 	}
 arr.flatten!
 arr.uniq!
