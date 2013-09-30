@@ -19,7 +19,7 @@ guesses = Array.new(range.to_i)
 out = '_' *range.to_i
 target = ""
 while attempts > 0 && out != target
-	puts "enter your guess: "
+	puts "\nenter your guess: "
 	guess = gets[0]
 	if guesses.include? guess
 		puts "you already guessed #{guess}\n"
@@ -27,25 +27,36 @@ while attempts > 0 && out != target
 		puts "only lowercase letters a-z are allowed\n"
 	else
 		guesses.push(guess)
-		#if guesses[-1][0].is_a?
 		if words.select { |string| string.include? guesses[-1][0]}.count != words.count && target == ""
 			words.delete_if { |string| string.include? guesses[-1][0]}	
 			attempts -= 1
 		elsif target == ""
 			target = words[0]
-			out[target.index(guesses[-1][0])] = guesses[-1][0]
+			index = 0
+			target.each_char{|c| if c == guesses[-1]
+						out[index] = guesses[-1][0]
+						index += 1
+						else
+							index += 1
+						end}
 		elsif target.index(guesses[-1][0])
-			out[target.index(guesses[-1][0])] = guesses[-1][0]
+			index = 0
+			target.each_char{|c| if c == guesses[-1]
+						out[index] = guesses[-1][0]
+						index += 1
+						else
+							index += 1
+						end}
 		else
 			attempts -= 1
 		end
+	end
 		guesses.each { |string| if string
 						string.strip!
 						print "#{string} "
 					end}
 		puts "(#{attempts} chances left)\n"	
-		puts out
-	end
+		out.each_char {|c| print c, ' '}
 end
 	if out == target
 		puts "\nYOU WIN!\n"
