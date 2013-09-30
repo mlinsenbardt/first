@@ -10,21 +10,23 @@ range = gets
  
 words.select! { |string| string.strip!
 		string.size == range.to_i}
-puts words
 attempts = 10
 guesses = Array.new(range.to_i)
 out = '_' *range.to_i
-while attempts > 0
+target = ""
+while attempts > 0 && out != target
 	puts "enter your guess: "
 	guesses.push(gets)
-	if words.select { |string| string.include? guesses[-1][0]}.count != words.count
+	if words.select { |string| string.include? guesses[-1][0]}.count != words.count && target == ""
 		words.delete_if { |string| string.include? guesses[-1][0]}	
 		attempts -= 1
-		puts words 
-		puts guesses[-1]
-	else
+	elsif target == ""
 		target = words[0]
 		out[target.index(guesses[-1][0])] = guesses[-1][0]
+	elsif target.index(guesses[-1][0])
+		out[target.index(guesses[-1][0])] = guesses[-1][0]
+	else
+		attempts -= 1
 	end
 		guesses.each { |string| if string
 						string.strip!
@@ -33,7 +35,8 @@ while attempts > 0
 		puts "(#{attempts} chances left)\n"	
 		puts out
 end
-puts words
-
-
-
+	if out == target
+		puts "\nYOU WIN!\n"
+	else
+		puts "\nYOU LOSE\n"
+	end
